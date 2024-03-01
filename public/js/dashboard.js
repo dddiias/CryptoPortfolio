@@ -191,11 +191,15 @@ async function addAsset(name, spent, amount) {
     }
 
     try {
+        updateStatus('Processing transaction...');
         const transaction = await contract.addAsset(name, spent, amount);
         await transaction.wait();
-        console.log('Asset added successfully.');
+        updateStatus('Asset added successfully.');
+        await displayPortfolioInfo();
+        await displayTotalCapital();
     } catch (error) {
         console.error('Error adding asset:', error);
+        updateStatus('Error adding asset: ' + error.message, false);
     }
 }
 
@@ -253,21 +257,33 @@ async function modifyAssetPrompt(index) {
 }
 
 async function modifyAsset(index, newName, newSpent, newAmount) {
-    await requestAccount();
-    const transaction = await contract.modifyAsset(index, newName, ethers.utils.parseUnits(newSpent, 'ether'), ethers.utils.parseUnits(newAmount, 'ether'));
-    await transaction.wait();
-    console.log('Asset modified successfully.');
-    await displayPortfolioInfo();
-    await displayTotalCapital();
+    try {
+        updateStatus('Modifying asset...');
+        await requestAccount();
+        const transaction = await contract.modifyAsset(index, newName, ethers.utils.parseUnits(newSpent, 'ether'), ethers.utils.parseUnits(newAmount, 'ether'));
+        await transaction.wait();
+        updateStatus('Asset modified successfully.');
+        await displayPortfolioInfo();
+        await displayTotalCapital();
+    } catch (error) {
+        console.error('Error modifying asset:', error);
+        updateStatus('Error modifying asset: ' + error.message, false);
+    }
 }
 
 async function removeAsset(index) {
-    await requestAccount();
-    const transaction = await contract.removeAsset(index);
-    await transaction.wait();
-    console.log('Asset removed successfully.');
-    await displayPortfolioInfo();
-    await displayTotalCapital();
+    try {
+        updateStatus('Removing asset...');
+        await requestAccount();
+        const transaction = await contract.removeAsset(index);
+        await transaction.wait();
+        updateStatus('Asset removed successfully.');
+        await displayPortfolioInfo();
+        await displayTotalCapital();
+    } catch (error) {
+        console.error('Error removing asset:', error);
+        updateStatus('Error removing asset: ' + error.message, false);
+    }
 }
 
 async function fetchCryptoPrices() {
@@ -292,3 +308,10 @@ async function fetchCryptoPrices() {
 document.addEventListener('DOMContentLoaded', async () => {
     await fetchCryptoPrices();
 });
+
+
+function updateStatus(message, isSuccess = true) {
+    const statusElement = document.getElementById('statusMessage');
+    statusElement.textContent = message;
+    statusElement.style.color = isSuccess ? 'green' : 'red';
+}
