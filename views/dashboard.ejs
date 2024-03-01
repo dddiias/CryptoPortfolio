@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="portfolioInfo">
+                    <h2>Your Portfolio</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Asset Name</th>
+                                    <th>Amount Owned</th>
+                                    <th>Amount Spent</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="portfolioTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="totalCapital" class="text-right">
+                    <p id="capitalMetric"></p>
+                </div>
+                <div id="addAssetForm">
+                    <h2>Add New Asset</h2>
+                    <form id="assetForm">
+                        <div class="form-group">
+                            <label for="name">Asset Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="spent">Amount Spent:</label>
+                            <input type="number" class="form-control" id="spent" name="spent" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount Owned:</label>
+                            <input type="number" class="form-control" id="amount" name="amount" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Asset</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="cryptoPricesWidget">
+                    <h2 class="text-center">Current Prices</h2>
+                    <div id="cryptoPricesContainer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

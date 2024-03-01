@@ -1,0 +1,46 @@
+body {
+    padding: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+.table th,
+.table td {
+    border: none;
+}
+
+#cryptoPricesWidget {
+    margin-top: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    max-width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.cryptoPrice {
+    margin-bottom: 5px;
+    color: #007bff;
+}
+
+.asset-container {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.asset-actions {
+    margin-top: 10px;
+}
+
+.btn-action {
+    margin-right: 5px;
+}
